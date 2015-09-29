@@ -1,14 +1,17 @@
 {
-  "name"         : "ssnoc_testlab",
-  "version"      : "0.0.0",
-  "description"  : "Simple todo application.",
-  "main"         : "server.js",
-  "author"       : "Scotch",
-  "dependencies" : {
-    "express"         : "~4.6.1",
-    "mongoose"        : "~3.8.13",
-    "morgan"          : "~1.1.1",
-    "body-parser"     : "~1.4.3",
-    "method-override" : "~2.1.1"
+  "name": "ssnoc_testlab",
+  "version": "0.0.0",
+  "description": "Simple todo application.",
+  "main": "server.js",
+  "author": "Scotch",
+  "dependencies": {
+    "angular": "^1.4.6",
+    "body-parser": "^1.4.3",
+    "express": "^4.13.3",
+    "method-override": "~2.1.1",
+    "mongodb": "^2.0.44",
+    "mongoose": "^3.8.35",
+    "morgan": "~1.1.1",
+    "socket.io": "^1.3.7"
   }
 }
