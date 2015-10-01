@@ -4,9 +4,12 @@ function getTodos(res){
 	Todo.find(function(err, todos) {
 
 			// if there is an error retrieving, send the error. nothing after res.send(err) will execute
-			if (err)
-				res.send(err)
+			if (err) {
+				return res.send(err)	
+				//console.log('Error!');
+			}
 
+			console.log(todos);
 			res.json(todos); // return all todos in JSON format
 		});
 };

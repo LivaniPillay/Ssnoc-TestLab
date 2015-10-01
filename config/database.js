@@ -1,5 +1,5 @@
 module.exports = {
 
 	// the database url to connect
-	url : 'mongodb://localhost/ssnocdb'
+	url : 'tingodb:///data/fsedb/'
 }

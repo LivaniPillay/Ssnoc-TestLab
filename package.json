@@ -11,6 +11,8 @@
     "method-override": "~2.1.1",
     "mongodb": "^2.0.44",
     "mongoose": "^3.8.35",
+    "mongoose": "4.x",
+    "tungus": "*",
     "morgan": "~1.1.1",
     "socket.io": "^1.3.7"
   }
