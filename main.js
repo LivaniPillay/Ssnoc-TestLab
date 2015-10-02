@@ -2,9 +2,8 @@
 var express  = require('express');
 var app      = express(); 								// create our app w/ express
 var tungus   = require('tungus');
-var mongoose = require('mongoose'); 					// mongoose for mongodb
-var port  	 = process.env.PORT || 2222; 				// set the port
-//var database = require('./config/database'); 			// load the database config
+var mongoose = require('mongoose'); 					// mongoose for tingoDb
+var port  	 = process.env.PORT || 2222; 				// set the port		// load the database config
 var morgan   = require('morgan');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
@@ -21,7 +20,7 @@ app.use(methodOverride('X-HTTP-Method-Override')); // override with the X-HTTP-M
 
 
 // routes ======================================================================
-require('./app/routes.js')(app);
+require('./app/apiController.js')(app);
 
 // listen (start app with node server.js) ======================================
 app.listen(port);

@@ -1,17 +1,17 @@
 {
   "name": "ssnoc_testlab",
-  "version": "0.0.0",
-  "description": "Simple todo application.",
+  "version": "0.1",
+  "description": "Ssnoc application CMU SV team BRICS",
   "main": "server.js",
-  "author": "Scotch",
+  "author": "CMU-BRICS",
   "dependencies": {
-    "angular": "^1.4.6",
-    "body-parser": "^1.4.3",
     "express": "^4.13.3",
-    "method-override": "~2.1.1",
-    "mongoose": "4.x",
+    "angular": "^1.4.6",
     "tungus": "*",
-    "morgan": "~1.1.1",
+    "mongoose": "4.x",
+    "body-parser": "^1.4.3",
     "socket.io": "^1.3.7"
+    "method-override": "~2.1.1",
+    "morgan": "~1.1.1",
   }
 }
