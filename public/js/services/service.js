@@ -4,15 +4,21 @@ angular.module('ssnocService', [])
 	// each function returns a promise object 
 	.factory('SsnocFactory', ['$http',function($http) {
 		return {
-			get : function() {
-				return $http.get('/api/todos');
+			getDirectory : function() {
+				return $http.get('/api/ssnoc/directory');
 			},
-			create : function(todoData) {
-				return $http.post('/api/todos', todoData);
-				console.log('todoData', todoData);
+			getMember : function(username) {
+				return $http.get('/api/ssnoc/',username);
 			},
+			create : function(member) {
+				return $http.post('/api/ssnoc/member', member);
+				console.log('Adding member ', member);
+			},
+			updateStatus : function(member){
+				return $http.post('/api/ssnoc/updateStatus', member)
+			}
 			delete : function(id) {
-				return $http.delete('/api/todos/' + id);
+				return $http.delete('/api/ssnoc/' + id);
 			}
 		}
 	}]);

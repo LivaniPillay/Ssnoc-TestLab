@@ -1,50 +1,112 @@
 angular.module('ssnocController', [])
 
 	// inject the Todo service factory into our controller
-	.controller('mainController', ['$scope','$http','Todos', function($scope, $http, Todos) {
-		$scope.formData = {};
+	.controller('mainController', ['$scope','$http','SsnocFactory', function($scope, $http, SsnocFactory) {
+		$scope.member = {};
+		$scope.directory = {};
 		$scope.loading = true;
 
 		// GET =====================================================================
 		// when landing on the page, get all todos and show them
 		// use the service to get all the todos
-		Todos.get()
+		SsnocFactory.getDirectory()
 			.success(function(data) {
-				$scope.todos = data;
+				$scope.directory = data;
 				$scope.loading = false;
 			});
 
+		$scope.login = function(){
+
+			$scope.loading = true;
+			if($scope.isExistingMember)
+			{
+				if($scope.validateLoginDetails)
+				{
+					goOnline();
+					
+				}
+				else{
+
+				}
+			}
+			else
+			{
+
+			}
+		}
+
+		$scope.logout = function(){
+			$scope.loading = true;
+			goOffline();
+		}
+
+		getDirectory = function()
+		{	
+			$scope.loading = true;
+			
+			SsnocFactory.getDirectory()
+			.success(function(data) {
+				$scope.directory = data;
+				$scope.loading = false;
+			});	
+
+		}
 		// CREATE ==================================================================
 		// when submitting the add form, send the text to the node API
-		$scope.createTodo = function() {
-
-			// validate the formData to make sure that something is there
-			// if form is empty, nothing will happen
-			if ($scope.formData.text != undefined) {
+		createMember = function() {
 				$scope.loading = true;
 
 				// call the create function from our service (returns a promise object)
-				Todos.create($scope.formData)
-
-					// if successful creation, call our get function to get all the new todos
+				SsnocFactory.create($scope.member)
 					.success(function(data) {
 						$scope.loading = false;
-						$scope.formData = {}; // clear the form so our user is ready to enter another
-						$scope.todos = data; // assign our new list of todos
+						$scope.member = member; 
 					});
 			}
 		};
 
-		// DELETE ==================================================================
-		// delete a todo after checking it
-		$scope.deleteTodo = function(id) {
-			$scope.loading = true;
 
-			Todos.delete(id)
-				// if successful creation, call our get function to get all the new todos
-				.success(function(data) {
-					$scope.loading = false;
-					$scope.todos = data; // assign our new list of todos
+		isExistingMember = function(){
+			SsnocFactory.getMember($scope.member.username)
+				.success(function(data){
+					//@angela please use data to validate login details with $scope.member
+					if(data != undefined)
+					{
+						$scope.member = data;
+						return true;
+					}else
+					{
+						return false;
+					}
 				});
-		};
+		}
+
+		$scope.validateLoginDetails = function(){
+
+		}
+
+		$scope.validateSignInDetails = function(){
+
+		}
+
+		goOnline = function(){
+			//@angela validate here
+			$scope.member.status =1;
+			updateStatus();
+		}
+
+		goOffline = function(){
+			//@angela please add validation
+			$scope.member.status = 0;
+			updateStatus();
+		}
+
+		updateStatus = function(){
+			SsnocFactory.updateStatus($scope.member)
+			 	.success(function(data){
+			 		$scope.member = data;
+			 		$scope.loading = false;
+			 	});
+		}
+
 	}]);
