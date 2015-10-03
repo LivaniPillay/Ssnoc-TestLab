@@ -9,11 +9,6 @@ angular.module('ssnocController', [])
 		// GET =====================================================================
 		// when landing on the page, get all todos and show them
 		// use the service to get all the todos
-		SsnocFactory.getDirectory()
-			.success(function(data) {
-				$scope.directory = data;
-				$scope.loading = false;
-			});
 
 		$scope.login = function(){
 
@@ -23,7 +18,7 @@ angular.module('ssnocController', [])
 				if($scope.validateLoginDetails)
 				{
 					goOnline();
-					
+
 				}
 				else{
 
@@ -81,11 +76,11 @@ angular.module('ssnocController', [])
 				});
 		}
 
-		$scope.validateLoginDetails = function(){
+		validateLoginDetails = function(){
 
 		}
 
-		$scope.validateSignInDetails = function(){
+		validateSignInDetails = function(){
 
 		}
 
