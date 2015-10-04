@@ -4,7 +4,6 @@
 		    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 		    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
 			<meta name="Join" content="">
 		    <meta name="CMU-Brics" content="">
 
@@ -22,18 +21,19 @@
 	<body ng-controller="mainController">
 
 		<div class="container">
-			<form class="form-signin" action="chatPublicly.html">
+			<form class="form-signin">
 		        <h2 class="form-signin-heading">Join Community</h2>
 
 		        <p><img  src="images/User.png"></img>
-					<input type="text" id="name" class="form-control"name="username" placeholder="Username" required autofocus></p>
+					<input ng-model="member.username" type="text" id="name" class="form-control"name="username" placeholder="Username" required autofocus>
+				</p>
 		      
 		        <p><img  src="images/pass.png"></img>
-		        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required></p>
+		        <input ng-model="member.password" type="password" id="inputPassword" class="form-control" placeholder="Password" required></p>
 
-		       <!-- <p><input type="hidden" id="inputPassword" class="form-control" placeholder=" Confirm Password"></p> -->
+		        <p><input ng-model="member.confirmPassword" type="hidden" id="inputPassword" class="form-control" placeholder=" Confirm Password"></p>
 
-				<p><button type="submit" class="btn btn-success">Join</button></p>
+				<p><button ng-click="login" type="submit" class="btn btn-success">Join</button></p>
 		    </form>
 
 		</div> 
