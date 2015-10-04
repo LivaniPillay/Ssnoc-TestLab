@@ -41,7 +41,6 @@ body {
   text-align: center;
   background-color: #FFE4E1;
   float: right;
-
 }
 
 .onlineDirectory{
@@ -51,7 +50,6 @@ body {
   width: 80%;
   background-color:#90EE90;
   overflow: scroll;
-
 }
 
 .offlineDirectory{
@@ -60,14 +58,13 @@ body {
   width: 80%;
   background-color:#F08080;
   overflow: scroll;
-
 }
 
 .chatArea{
   margin: 5px auto;
   margin-left: 10px;
   height:80%;
-  width: 78%;
+  width: 75%;
   background-color:#F5DEB3;
   overflow: scroll;
   float: left;
@@ -76,7 +73,7 @@ body {
 .sendMsg {
 margin: 7px auto;
 margin-left: 10px;
-width: 78%;
+width: 75%;
 height:7%;
 float: left;
 background-color: #FFC0CB;
