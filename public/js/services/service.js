@@ -8,17 +8,17 @@ angular.module('ssnocService', [])
 				return $http.get('/api/ssnoc/directory');
 			},
 			getMember : function(username) {
-				return $http.get('/api/ssnoc/',username);
+				return $http.get('/api/ssnoc/member/',id);
 			},
 			create : function(member) {
 				return $http.post('/api/ssnoc/member', member);
 				console.log('Adding member ', member);
 			},
 			updateStatus : function(member){
-				return $http.post('/api/ssnoc/updateStatus', member)
+				return $http.post('/api/ssnoc/updateStatus', id,status)
 			}
-			delete : function(id) {
-				return $http.delete('/api/ssnoc/' + id);
-			}
+			// delete : function(id) {
+			// 	return $http.delete('/api/ssnoc/' + id);
+			// }
 		}
 	}]);

@@ -14,18 +14,9 @@ angular.module('mainController', [])
 		$scope.login = function(){
 
 			$scope.loading = true;
-<<<<<<< HEAD
-			if($scope.isExistingMember)
-			{
-				if($scope.validateLoginDetails)
-				{
-					goOnline();
-
-=======
 			if($scope.isExistingMember){
 				if(validateLoginDetails()){
 					updateStatus();		
->>>>>>> validation
 				}
 			}	
 			else{
@@ -112,13 +103,6 @@ angular.module('mainController', [])
 			}
 		}
 
-<<<<<<< HEAD
-		validateLoginDetails = function(){
-
-		}
-
-		validateSignInDetails = function(){
-=======
 		$scope.isExistingMember = function(){
 			if(getMember()!=undefined)
 			{
@@ -133,7 +117,6 @@ angular.module('mainController', [])
 		}
 
 		function validateLoginDetails(){
->>>>>>> validation
 
 			if(getMember().password == $scope.member.password)
 			{
