@@ -28,7 +28,7 @@
 				Welcome to Brics SSNOC Chat 
 			</div>	
 			
-			<div class="directory">
+			<div ng-repeat="name in directory|orderBy: sortType"  class="directory">
 						<div class="btn-group" position="right" >
 							    <button type="button" class="btn btn-primary">Share your Status</button>
 							    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">

@@ -13,7 +13,7 @@ function getMembers(res){
 };
 
 function getMember(req, res){
-	Member.findOne({_id: req.params.member_id}, function(err, members) {
+	Member.findOne({name: req.params.name}, function(err, members) {
 
 			if (err) {
 				return res.send(err)	
@@ -58,7 +58,7 @@ module.exports = function(app) {
 		getMembers(res);
 	});
 
-	app.get('/api/ssnoc/member/:member_id', function(req, res) {
+	app.get('/api/ssnoc/member/:name', function(req, res) {
 		getMember(req, res);
 	});
 

@@ -1,14 +1,12 @@
-angular.module('ssnocService', [])
+app.factory('ssnocService',function($http) {
 
-	// super simple service
-	// each function returns a promise object 
-	.factory('SsnocFactory', ['$http',function($http) {
-		return {
+        var service = {
+        
 			getDirectory : function() {
 				return $http.get('/api/ssnoc/directory');
 			},
 			getMember : function(username) {
-				return $http.get('/api/ssnoc/member/',id);
+				return $http.get('/api/ssnoc/member/'+ username);
 			},
 			create : function(member) {
 				return $http.post('/api/ssnoc/member', member);
@@ -21,4 +19,6 @@ angular.module('ssnocService', [])
 			// 	return $http.delete('/api/ssnoc/' + id);
 			// }
 		}
-	}]);
+
+		return service;
+});

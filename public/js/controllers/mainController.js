@@ -1,8 +1,8 @@
 
-app.controller("mainController",function($scope){
+app.controller("mainController",function($scope, ssnocService){
 		$scope.member = {};
 		$scope.directory = {};
-		$scope.sortType =""
+		$scope.sortType ="status";
 		$scope.loading = true;
 
 		// GET =====================================================================
@@ -10,9 +10,10 @@ app.controller("mainController",function($scope){
 		// use the service to get all the todos
 
 		$scope.login = function(){
-			console.log("member " + $scope.member);
+
+			console.log($scope.member.username);
 			$scope.loading = true;
-			if($scope.isExistingMember){
+			if($scope.isExistingMember()){
 				if(validateLoginDetails()){
 					updateStatus();		
 				}
@@ -37,7 +38,7 @@ app.controller("mainController",function($scope){
 		function getDirectory()
 		{	
 			$scope.loading = true;
-			SsnocFactory.getDirectory()
+			ssnocService.getDirectory()
 				.success(function(data) {
 			  // Sample data:
 			  // data = {
@@ -84,7 +85,7 @@ app.controller("mainController",function($scope){
 				$scope.loading = true;
 
 				// call the create function from our service (returns a promise object)
-				SsnocFactory.create($scope.member)
+				ssnocService.create($scope.member)
 					.success(function(data) {
 						$scope.loading = false;
 						$scope.member = member; 
@@ -93,16 +94,22 @@ app.controller("mainController",function($scope){
 
 		function getMember(){
 			$scope.loading = true;
-			SsnocFactory.getMember($scope.member.username)
+			ssnocService.getMember($scope.member.username)
 			.success(function(data){
 
 				$scope.loading = false;
 				return data;
+			}).error(function(error)
+			{
+				console.log(error);
 			});
 		}
 
 		$scope.isExistingMember = function(){
-			if(getMember()!=undefined)
+			var dbMember = getMember();
+			console.log(dbMember);
+
+			if(dbMember !=undefined)
 			{
 				return true;
 			}
@@ -115,9 +122,12 @@ app.controller("mainController",function($scope){
 		}
 
 		function validateLoginDetails(){
-
-			if(getMember().password == $scope.member.password){
+			var dbMember = getMember();
+			if(dbMember != undefined)
+			{
+				if(dbMember.password == $scope.member.password){
 				return true;
+				}
 			}
 			else {
 				 $message = "wrong infomation";
@@ -148,7 +158,7 @@ app.controller("mainController",function($scope){
 
 		//update status send no
 		function updateStatus(member){
-			SsnocFactory.updateStatus(member).success(
+			ssnocService.updateStatus(member).success(
 				function(data){
 			 		$scope.member = data;
 			 		console.log(data);
