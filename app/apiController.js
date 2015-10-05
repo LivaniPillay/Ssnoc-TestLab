@@ -12,8 +12,8 @@ function getMembers(res){
 		});
 };
 
-function getMember(id, res){
-	Member.findOne({_id: id}, function(err, members) {
+function getMember(req, res){
+	Member.findOne({_id: req.params.member_id}, function(err, members) {
 
 			if (err) {
 				return res.send(err)	
@@ -59,8 +59,7 @@ module.exports = function(app) {
 	});
 
 	app.get('/api/ssnoc/member/:member_id', function(req, res) {
-		var _id = req.params.memeber_id;
-		getMember(_id, res);
+		getMember(req, res);
 	});
 
 	app.get('/api/ssnoc/update_status/:memeber_id/:status_id', function(req, res) {
