@@ -11,39 +11,18 @@
 		    <link href="css/signin.css" rel="stylesheet">
 			<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 			<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-			<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+			<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
+			<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-route.min.js"></script>
 
-			<script src="js/controllers/controller.js"></script> 
+
+			<script src="js/controllers/mainController.js"></script> 
 			<script src="js/services/service.js"></script> 
 			<script src="js/core.js"></script>
 
 	</head>
-	<body ng-controller="mainController">
-
-		<div class="container">
-			<form class="form-signin">
-		        <h2 class="form-signin-heading">Join Community</h2>
-		        <p><img  src="images/User.png"></img>
-
-					<input ng-model="member.username" type="text" id="name" class="form-control"name="username" placeholder="Username" required autofocus>
-				</p>
-		      
-		        <p><img  src="images/pass.png"></img>
-		        <input ng-model="member.password" type="password" id="inputPassword" class="form-control" placeholder="Password" required></p>
-
-		        <p><input ng-model="member.confirmPassword" type="hidden" id="inputPassword" class="form-control" placeholder=" Confirm Password"></p>
-
-				<p><button ng-click="login" type="submit" class="btn btn-success">Join</button></p>
-		    </form>
-
-		</div> 
-
-		<!-- Angela add -->
-		<div>
-		  <p id="message"> </p>
-		  <ul id="directory"> </ul>
-
-		</div>
+	<body>
+	<div ng-view>	
+	</div>
 </body>
 </html>
 

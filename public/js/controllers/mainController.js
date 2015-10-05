@@ -1,7 +1,7 @@
-angular.module('mainController', [])
+var app = angular.module('mainController');
 
 	// inject the Todo service factory into our controller
-	.controller('mainController', ['$scope','$http','SsnocFactory', function($scope, $http, SsnocFactory) {
+	app.controller('mainController', ['$scope','$http','SsnocFactory', function($scope, $http, SsnocFactory) {
 		$scope.member = {};
 		$scope.directory = {};
 		$scope.sortType =""
@@ -100,7 +100,7 @@ angular.module('mainController', [])
 
 				$scope.loading = false;
 				return data;
-			}
+			});
 		}
 
 		$scope.isExistingMember = function(){

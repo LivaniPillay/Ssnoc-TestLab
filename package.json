@@ -7,6 +7,7 @@
   "dependencies": {
     "express": "^4.13.3",
     "angular": "^1.4.6",
+    "angular-route": "*",
     "tungus": "*",
     "mongoose": "4.x",
     "body-parser": "^1.4.3",

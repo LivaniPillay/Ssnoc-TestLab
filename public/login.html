@@ -1,0 +1,24 @@
+<div ng-controller="mainController" class="container">
+			<form class="form-signin">
+		        <h2 class="form-signin-heading">Join Community</h2>
+		        <p><img  src="images/User.png"></img>
+
+					<input ng-model="member.username" type="text" id="name" class="form-control"name="username" placeholder="Username" required autofocus>
+				</p>
+		      
+		        <p><img  src="images/pass.png"></img>
+		        <input ng-model="member.password" type="password" id="inputPassword" class="form-control" placeholder="Password" required></p>
+
+		        <p><input ng-model="member.confirmPassword" type="hidden" id="inputPassword" class="form-control" placeholder=" Confirm Password"></p>
+
+				<p><button ng-click="login" type="submit" class="btn btn-success">Join</button></p>
+		    </form>
+
+
+		<!-- Angela add -->
+		<div>
+		  <p id="message"> </p>
+		  <ul id="directory"> </ul>
+
+		</div>
+</div> 
