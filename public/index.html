@@ -1,4 +1,4 @@
-<html ng-app="ssnoc">
+<html>
 	<head>
 		    <meta charset="utf-8">
 		    <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,43 +15,15 @@
 			<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-route.min.js"></script>
 
 
-			<script src="js/controllers/mainController.js"></script> 
-			<script src="js/services/service.js"></script> 
+	<!-- 		// <script src="js/controllers/mainController.js"></script> 
+			// <script src="js/services/service.js"></script> -->
 			<script src="js/core.js"></script>
+			<script src="js/controllers/mainController.js"></script> 
 
 	</head>
-<<<<<<< HEAD
-	<body>
+	<body ng-app="ssnoc">
 	<div ng-view>	
 	</div>
-=======
-	<body ng-controller="mainController">
-
-		<div class="container">
-			<form class="form-signin">
-		        <h2 class="form-signin-heading">Join Community</h2>
-
-		        <p><img  src="images/User.png"></img>
-
-					<input ng-model="member.username" type="text" id="name" class="form-control"name="username" placeholder="Username" required autofocus>
-				</p>
-		      
-		        <p><img  src="images/pass.png"></img>
-		        <input ng-model="member.password" type="password" id="inputPassword" class="form-control" placeholder="Password" required></p>
-
-		        <p><input ng-model="member.confirmPassword" type="hidden" id="inputPassword" class="form-control" placeholder=" Confirm Password"></p>
-
-				<div ng-model="alert.message" class="alert alert-warning alert-dismissible" role="alert" hidden="true">
-				</div>
-				<p><button ng-click="login" type="submit" class="btn btn-success" data-dismiss="alert">Join</button>
-
-				</p>
-
-
-		    </form>
-
-		</div> 
->>>>>>> 510999e84ac8bf0e1c5c13672f031e9302f85250
-</body>
+	</body>
 </html>
 

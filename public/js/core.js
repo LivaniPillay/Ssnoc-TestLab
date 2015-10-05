@@ -1,12 +1,12 @@
-var app = angular.module('ssnoc', ['ngRoute']);
+var app = angular.module('ssnoc',['ngRoute']);
 
-app.config(function($routeProvider) {
+app.config(['$routeProvider', function($routeProvider) {
         $routeProvider
 
             // route for the home page
             .when('/', {
                 templateUrl : 'login.html',
-                controller  : 'mainController.js'
+                controller  : 'mainController'
             })
 
             // // route for the about page
@@ -20,4 +20,4 @@ app.config(function($routeProvider) {
             //     templateUrl : 'pages/contact.html',
             //     controller  : 'contactController'
             // });
-    });
+    }]);

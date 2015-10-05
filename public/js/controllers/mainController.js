@@ -1,7 +1,5 @@
-var app = angular.module('mainController');
 
-	// inject the Todo service factory into our controller
-	app.controller('mainController', ['$scope','$http','SsnocFactory', function($scope, $http, SsnocFactory) {
+app.controller("mainController",function($scope){
 		$scope.member = {};
 		$scope.directory = {};
 		$scope.sortType =""
@@ -91,7 +89,7 @@ var app = angular.module('mainController');
 						$scope.loading = false;
 						$scope.member = member; 
 					});
-		};
+		}
 
 		function getMember(){
 			$scope.loading = true;
@@ -158,5 +156,4 @@ var app = angular.module('mainController');
 			 	}
 			);
 		}
-
-	}]);
+});
