@@ -23,6 +23,7 @@
 		<div class="container">
 			<form class="form-signin">
 		        <h2 class="form-signin-heading">Join Community</h2>
+
 		        <p><img  src="images/User.png"></img>
 
 					<input ng-model="member.username" type="text" id="name" class="form-control"name="username" placeholder="Username" required autofocus>
@@ -33,17 +34,16 @@
 
 		        <p><input ng-model="member.confirmPassword" type="hidden" id="inputPassword" class="form-control" placeholder=" Confirm Password"></p>
 
-				<p><button ng-click="login" type="submit" class="btn btn-success">Join</button></p>
+				<div ng-model="alert.message" class="alert alert-warning alert-dismissible" role="alert" hidden="true">
+				</div>
+				<p><button ng-click="login" type="submit" class="btn btn-success" data-dismiss="alert">Join</button>
+
+				</p>
+
+
 		    </form>
 
 		</div> 
-
-		<!-- Angela add -->
-		<div>
-		  <p id="message"> </p>
-		  <ul id="directory"> </ul>
-
-		</div>
 </body>
 </html>
 
