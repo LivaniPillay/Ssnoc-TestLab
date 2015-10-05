@@ -12,7 +12,7 @@ angular.module('mainController', [])
 		// use the service to get all the todos
 
 		$scope.login = function(){
-
+			console.log("member " + $scope.member);
 			$scope.loading = true;
 			if($scope.isExistingMember){
 				if(validateLoginDetails()){
@@ -118,8 +118,7 @@ angular.module('mainController', [])
 
 		function validateLoginDetails(){
 
-			if(getMember().password == $scope.member.password)
-			{
+			if(getMember().password == $scope.member.password){
 				return true;
 			}
 			else {
