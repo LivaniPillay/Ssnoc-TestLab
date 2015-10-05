@@ -72,13 +72,12 @@ module.exports = function(app) {
 	});
 
 	app.delete('/api/ssnoc/member/:member_id', function(req, res) {
-
 		removeMember(req.params.memeber_id, res);
-
-		//res.json({ message: 'member removed ' + req.params.memeber_id });
 	});
 
 	app.get('*', function(req, res) {
-		res.sendfile(__dirname + '../public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
+		appRoot = __dirname + '/../public/index.html';
+		console.log(appRoot);
+		res.sendfile(appRoot); // load the single view file (angular will handle the page changes on the front-end)
 	});
 };
