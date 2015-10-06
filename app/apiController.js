@@ -1,4 +1,5 @@
-var Member = require('./models/models');
+var Member = require('./models/memberModel');
+var Message = require('./models/messageModel');
 
 function getMembers(res){
 	Member.find(function(err, members) {
@@ -54,6 +55,7 @@ function updateStatus (req, res) {
 module.exports = function(app) {
 
 // API Calls
+//Members
 	app.get('/api/ssnoc/directory', function(req, res) {
 		getMembers(res);
 	});
@@ -75,6 +77,17 @@ module.exports = function(app) {
 	app.delete('/api/ssnoc/member/:member_id', function(req, res) {
 		removeMember(req.params.memeber_id, res);
 	});
+
+//Chat
+	app.post('/api/ssnoc/message/:user_id/:message', function(req, res) {
+		addPublicMessage(req, res);
+	});
+
+	app.get('/api/ssnoc/messages', function(req, res) {
+		getPublicMessages(res);
+	});
+
+//Files
 
 	app.get('/chatting', function(req, res) {
 		appRoot = __dirname + '/../public/ChatPublicly.html';
