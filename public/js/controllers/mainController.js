@@ -5,6 +5,8 @@ app.controller("mainController",function($scope, ssnocService){
 		$scope.sortType ="status";
 		$scope.loading = true;
 
+		var promise = new Promise(function(resolve, reject){
+		});
 		// GET =====================================================================
 		// when landing on the page, get all todos and show them
 		// use the service to get all the todos
@@ -95,29 +97,37 @@ app.controller("mainController",function($scope, ssnocService){
 		function getMember(){
 			$scope.loading = true;
 			ssnocService.getMember($scope.member.username)
-			.success(function(data){
-
-				$scope.loading = false;
-				return data;
-			}).error(function(error)
-			{
-				console.log(error);
+			.then(function(response){
+				return response;
 			});
+			// .success(function(data){
+
+			// 	$scope.loading = false;
+			// 	return data;
+			// }).error(function(error)
+			// {
+			// 	console.log(error);
+			// });
 		}
 
 		$scope.isExistingMember = function(){
-			var dbMember = getMember();
-			console.log(dbMember);
 
-			if(dbMember !=undefined)
-			{
-				return true;
-			}
-			else
-			{
-				$scope.message = "no existing member";
-				return false;
-			}
+			ssnocService.getMember($scope.member.username)
+			.then(function(response){
+				console.log(response);
+				if(response !=undefined)
+				{
+					console.log("we are promising");
+					return true;
+				}
+				else
+				{
+					console.log("promise broken");
+					$scope.message = "no existing member";
+					return false;
+				}
+			});
+			
 
 		}
 

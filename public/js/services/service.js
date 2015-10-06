@@ -1,4 +1,4 @@
-app.factory('ssnocService',function($http) {
+app.factory('ssnocService',function($http, $q) {
 
         var service = {
         
@@ -6,7 +6,15 @@ app.factory('ssnocService',function($http) {
 				return $http.get('/api/ssnoc/directory');
 			},
 			getMember : function(username) {
-				return $http.get('/api/ssnoc/member/'+ username);
+				var defer = $q.defer();
+				$http.get('/api/ssnoc/member/'+ username).
+				success(function(res){
+					defer.resolve(res);
+				}).error(function(err){
+					defer.reject(err);
+				});
+
+				return defer.promise;
 			},
 			create : function(member) {
 				return $http.post('/api/ssnoc/member', member);
