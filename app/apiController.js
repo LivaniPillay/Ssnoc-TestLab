@@ -43,13 +43,13 @@ function removeMember (id, res) {
             res.send(err);
         }
 
-        res.json({ message: 'Member '+ id + 'Successfully deleted' });
+        res.json({ message: 'Member '+ id + ' successfully removed' });
     });
 }
 
 function updateStatus (req, res) {
 
-	res.json({ message: 'Status updated. Member ' + req.params.memeber_id + ' is ' + req.params.status_id });
+	res.json({ message: 'Status updated: Member ' + req.params.memeber_id + ' status is ' + req.params.status_id });
 };
 
 module.exports = function(app) {
@@ -76,6 +76,8 @@ module.exports = function(app) {
  *
  * @apiName GetMember
  *
+ * @apiParam {String} user name
+ *
  * @apiSuccess {String} JSON with member information.
  *
  * @apiSuccessExample Success-Response:
@@ -89,9 +91,13 @@ module.exports = function(app) {
 	});
 
 /**
- * @api {post} /api/ssnoc/update_status/:memeber_id/:status_id Update member status.
+ * @api {post} /api/ssnoc/update_status/:memeber_id/:status_id Update member status
  *
  * @apiName UpdateStatus
+ *
+ * @apiParam {Number} user id
+ *
+ * @apiParam {Number} status id
  *
  * @apiSuccess {String} JSON with member information.
  *
@@ -105,15 +111,19 @@ module.exports = function(app) {
 	});
 
 /**
- * @api {post} /api/ssnoc/member/:name/:pass Add members to directory.
+ * @api {post} /api/ssnoc/member/:name/:pass Add members to directory
  *
  * @apiName AddMember
  *
  * @apiSuccess {String} JSON with member information.
  *
+ * @apiParam {String} user name
+*
+ * @apiParam {String} password
+ *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- *     [{"name":"test","password":"1234","status":0,"_id":2,"__v":0}]
+ *     [{ message: 'Status updated: Member 3 status is 2 }]
  */
 
 	app.post('/api/ssnoc/member/:name/:pass', function(req, res) {
@@ -122,15 +132,17 @@ module.exports = function(app) {
 	});
 
 /**
- * @api {delete} /api/ssnoc/update_status/:memeber_id/:status_id
+ * @api {delete} /api/ssnoc/update_status/:memeber_id/:status_id Remove member from directory
  *
  * @apiName RemoveMember
  *
  * @apiSuccess {String} JSON with member information.
  *
+ * @apiParam {Number} member_id
+ *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- *     [{"name":"test","password":"1234","status":0,"_id":2,"__v":0}]
+ *     [{ message: 'Member Test successfully removed' }]
  */
 
 	app.delete('/api/ssnoc/member/:member_id', function(req, res) {
