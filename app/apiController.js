@@ -56,23 +56,82 @@ module.exports = function(app) {
 
 // API Calls
 //Members
+/**
+ * @api {get} /api/ssnoc/directory List all members in the directory
+ *
+ * @apiName GetMembers
+ *
+ * @apiSuccess {String} JSON with members information.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     [{"name":"test","password":"1234","status":0,"_id":2,"__v":0}]
+ */
 	app.get('/api/ssnoc/directory', function(req, res) {
 		getMembers(res);
 	});
+
+/**
+ * @api {get} /api/ssnoc/member:name List member information
+ *
+ * @apiName GetMember
+ *
+ * @apiSuccess {String} JSON with member information.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     [{"name":"test","password":"1234","status":0,"_id":2,"__v":0}]
+ */
 
 	app.get('/api/ssnoc/member/:name', function(req, res) {
 		getMember(req, res);
 		console.log("name!!")
 	});
 
-	app.get('/api/ssnoc/update_status/:memeber_id/:status_id', function(req, res) {
+/**
+ * @api {post} /api/ssnoc/update_status/:memeber_id/:status_id Update member status.
+ *
+ * @apiName UpdateStatus
+ *
+ * @apiSuccess {String} JSON with member information.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     [{"name":"test","password":"1234","status":0,"_id":2,"__v":0}]
+ */
+
+	app.post('/api/ssnoc/update_status/:memeber_id/:status_id', function(req, res) {
 		updateStatus(req,res);
 	});
+
+/**
+ * @api {post} /api/ssnoc/member/:name/:pass Add members to directory.
+ *
+ * @apiName AddMember
+ *
+ * @apiSuccess {String} JSON with member information.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     [{"name":"test","password":"1234","status":0,"_id":2,"__v":0}]
+ */
 
 	app.post('/api/ssnoc/member/:name/:pass', function(req, res) {
 
 		addMember (req, res);
 	});
+
+/**
+ * @api {delete} /api/ssnoc/update_status/:memeber_id/:status_id
+ *
+ * @apiName RemoveMember
+ *
+ * @apiSuccess {String} JSON with member information.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     [{"name":"test","password":"1234","status":0,"_id":2,"__v":0}]
+ */
 
 	app.delete('/api/ssnoc/member/:member_id', function(req, res) {
 		removeMember(req.params.memeber_id, res);
