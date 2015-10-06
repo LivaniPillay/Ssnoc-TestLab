@@ -10,10 +10,10 @@ app.config(['$routeProvider', function($routeProvider) {
             })
 
             // // route for the about page
-            // .when('/about', {
-            //     templateUrl : 'pages/about.html',
-            //     controller  : 'aboutController'
-            // })
+            .when('/chatting', {
+                templateUrl : 'ChatPublicly.html',
+                controller  : 'chatController'
+            })
 
             // // route for the contact page
             // .when('/contact', {

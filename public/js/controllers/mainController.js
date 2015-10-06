@@ -9,19 +9,55 @@ app.controller("mainController",function($scope, ssnocService){
 		// when landing on the page, get all todos and show them
 		// use the service to get all the todos
 
+
 		$scope.login = function(){
 
-			console.log($scope.member.username);
+			// console.log($scope.member.username);
 			$scope.loading = true;
-			if($scope.isExistingMember()){
-				if(validateLoginDetails()){
-					updateStatus();		
-				}
-			}	
-			else{
 
-			}
+			$scope.isExistingMember();
 		}
+
+
+		$scope.isExistingMember = function(){
+			ssnocService.getMember($scope.member.username)
+				.then(
+					function(response){
+						data = response.data;
+						if(data !=undefined)
+						{
+							if (validateLoginDetails(data)) {
+								  console.log("haodongxi");
+									// login successfull and send chat.html
+									// updateStatus();
+									window.location = "/#/chatting";
+
+							}
+							else {
+								console.log("huaidongxi");
+								console.log(data);
+								$scope.message = "wrong infomation,please type in again";
+							}
+						}
+									
+						else
+							// not a member, crete new
+						{ 
+							$scope.message = "no existing member";
+							//change hidden password box
+
+							// create new 
+							// createMember();
+							console.log("should creat new");
+						}
+					},
+					function(err){
+								console.log("failedcall");
+						}
+					);
+			    // console.log(dbMember);			
+				}
+
 
 		$scope.signIn = function()
 		{
@@ -83,7 +119,6 @@ app.controller("mainController",function($scope, ssnocService){
 		// when submitting the add form, send the text to the node API
 		function createMember() {
 				$scope.loading = true;
-
 				// call the create function from our service (returns a promise object)
 				ssnocService.create($scope.member)
 					.success(function(data) {
@@ -92,40 +127,29 @@ app.controller("mainController",function($scope, ssnocService){
 					});
 		}
 
-		function getMember(){
-			$scope.loading = true;
-			ssnocService.getMember($scope.member.username)
-			.success(function(data){
+		// function getMember(){
+		// 	$scope.loading = true;
+		// 	ssnocService.getMember($scope.member.username)
+		// 	.success(function(data){
+		// 		console.log(data);
 
-				$scope.loading = false;
-				return data;
-			}).error(function(error)
+		// 		$scope.loading = false;
+		// 		return data;
+		// 	}).error(function(error)
+		// 	{
+		// 		console.log(error);
+		// 	});
+		// }
+		
+
+		
+
+		
+		function validateLoginDetails(data){
+			// var dbMember = getMember();
+			if(data != undefined)
 			{
-				console.log(error);
-			});
-		}
-
-		$scope.isExistingMember = function(){
-			var dbMember = getMember();
-			console.log(dbMember);
-
-			if(dbMember !=undefined)
-			{
-				return true;
-			}
-			else
-			{
-				$scope.message = "no existing member";
-				return false;
-			}
-
-		}
-
-		function validateLoginDetails(){
-			var dbMember = getMember();
-			if(dbMember != undefined)
-			{
-				if(dbMember.password == $scope.member.password){
+				if(data.password == $scope.member.password){
 				return true;
 				}
 			}
@@ -161,7 +185,7 @@ app.controller("mainController",function($scope, ssnocService){
 			ssnocService.updateStatus(member).success(
 				function(data){
 			 		$scope.member = data;
-			 		console.log(data);
+			 		// console.log(data);
 			 		$scope.loading = false;
 			 	}
 			);

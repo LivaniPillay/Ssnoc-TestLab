@@ -60,6 +60,7 @@ module.exports = function(app) {
 
 	app.get('/api/ssnoc/member/:name', function(req, res) {
 		getMember(req, res);
+		console.log("name!!")
 	});
 
 	app.get('/api/ssnoc/update_status/:memeber_id/:status_id', function(req, res) {
@@ -75,9 +76,15 @@ module.exports = function(app) {
 		removeMember(req.params.memeber_id, res);
 	});
 
+	app.get('/chatting', function(req, res) {
+		appRoot = __dirname + '/../public/ChatPublicly.html';
+		res.sendfile(appRoot); // load the single view file (angular will handle the page changes on the front-end)
+	});
+	
 	app.get('*', function(req, res) {
 		appRoot = __dirname + '/../public/index.html';
 		console.log(appRoot);
 		res.sendfile(appRoot); // load the single view file (angular will handle the page changes on the front-end)
 	});
+
 };
