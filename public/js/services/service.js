@@ -14,7 +14,14 @@ app.factory('ssnocService',function($http) {
 			},
 			updateStatus : function(member){
 				return $http.post('/api/ssnoc/updateStatus', id,status)
+			},
+			addPublicMessage : function(message){
+				return $http.post('/api/ssnoc/message/' + user_id + '/' + message)
 			}
+			getPublicMessages : function(messages)
+				return $http.get('/api/ssnoc/messages')
+			}
+
 			// delete : function(id) {
 			// 	return $http.delete('/api/ssnoc/' + id);
 			// }
