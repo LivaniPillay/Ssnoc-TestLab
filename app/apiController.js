@@ -50,7 +50,25 @@ function removeMember (id, res) {
 
 function updateStatus (req, res) {
 
-	res.json({ message: 'Status updated: Member ' + req.params.memeber_id + ' status is ' + req.params.status_id });
+		console.log('updateStatus id' + req.params.member_id);
+
+	Member.findById(req.params.member_id, function(err, member) {
+			if (err) {
+				return res.send(err);
+			}
+
+		console.log('updateStatus' + member);
+
+		member.status = req.params.status_id;
+
+		member.save(function(err) {
+			if (err) {
+				return res.send(err);
+			}
+
+			res.json({ message: 'Status updated: Member ' + req.params.memeber_id + ' status is ' + req.params.status_id });
+		});
+	});
 };
 
 module.exports = function(app) {
@@ -109,7 +127,7 @@ module.exports = function(app) {
  *     [{"name":"test","password":"1234","status":0,"_id":2,"__v":0}]
  */
 
-	app.post('/api/ssnoc/update_status/:memeber_id/:status_id', function(req, res) {
+	app.post('/api/ssnoc/update_status/:member_id/:status_id', function(req, res) {
 		updateStatus(req,res);
 	});
 
