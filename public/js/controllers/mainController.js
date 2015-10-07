@@ -1,9 +1,11 @@
 
-app.controller("mainController",function($scope, ssnocService){
+app.controller("mainController",function($scope, ssnocService, $q){
 		$scope.member = {};
 		$scope.directory = {};
 		$scope.sortType ="status";
 		$scope.loading = true;
+		$scope.isExistingMember = true;
+		var defer = $q.defer();
 
 		// GET =====================================================================
 		// when landing on the page, get all todos and show them
@@ -11,52 +13,62 @@ app.controller("mainController",function($scope, ssnocService){
 
 
 		$scope.login = function(){
-
-			// console.log($scope.member.username);
 			$scope.loading = true;
 
-			$scope.isExistingMember();
-		}
 
-
-		$scope.isExistingMember = function(){
-			ssnocService.getMember($scope.member.username)
-				.then(
-					function(response){
-						data = response.data;
-						if(data !=undefined)
-						{
-							if (validateLoginDetails(data)) {
+			findExistingMember().then(function(response){
+				if($scope.isExistingMember)
+				{
+					console.log("exisitng member");
+					if (validateLoginDetails($scope.validateUser)) {
 								  console.log("haodongxi");
 									// login successfull and send chat.html
 									// updateStatus();
 									window.location = "/#/chatting";
+					}
+					else {
+						console.log("huaidongxi");
+						$scope.message = "wrong infomation,please type in again";
+					}
+				}
+			});
+		}
 
-							}
-							else {
-								console.log("huaidongxi");
-								console.log(data);
-								$scope.message = "wrong infomation,please type in again";
-							}
+
+		function findExistingMember(){
+			ssnocService.getMember($scope.member.username)
+				.then(
+					function(response){
+						console.log("response " + response.data);
+						if(response.data !=undefined)
+						{ 	
+							$scope.validateUser  = response.data;
+							console.log("true");
+							$scope.isExistingMember = true;
+							defer.resolve($scope.isExistingMember);
 						}
-									
 						else
 							// not a member, crete new
 						{ 
+							console.log("false");
 							$scope.message = "no existing member";
+							$scope.isExistingMember = false;
+							defer.resolve($scope.isExistingMember);
 							//change hidden password box
 
 							// create new 
-							// createMember();
-							console.log("should creat new");
+							// createMember();	
 						}
 					},
 					function(err){
-								console.log("failedcall");
+							console.log("failedcall");
+							defer.reject(err);
 						}
 					);
+
+					return defer.promise;
 			    // console.log(dbMember);			
-				}
+		}
 
 
 		$scope.signIn = function()
@@ -141,12 +153,8 @@ app.controller("mainController",function($scope, ssnocService){
 		// 	});
 		// }
 		
-
-		
-
-		
 		function validateLoginDetails(data){
-			// var dbMember = getMember();
+			console.log("validation " + data);
 			if(data != undefined)
 			{
 				if(data.password == $scope.member.password){
@@ -154,7 +162,7 @@ app.controller("mainController",function($scope, ssnocService){
 				}
 			}
 			else {
-				 $message = "wrong infomation";
+				 $scope.message = "wrong infomation";
 				 return false;		 
 			}
 		}
