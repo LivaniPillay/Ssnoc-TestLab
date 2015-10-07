@@ -76,7 +76,7 @@ function addPublicMessage(req, res) {
 			return res.send(err);
 		}
 
-		message = new Message({req.params.message, req.params.member_id, member.status});
+		message = new Message({message: req.params.message, member_id: req.params.member_id, status: member.status});
 		
 		message.save(function (err, obj) {	  
 			if (err) {
@@ -85,10 +85,20 @@ function addPublicMessage(req, res) {
 
 			res.json(message);
 		});
-	}
+	});
 
 }
 
+function getPublicMessages(res){
+	Message.find(function(err, messages) {
+
+			if (err) {
+				return res.send(err)	
+			}
+
+			res.json(messages); // return all todos in JSON format
+		});
+};
 
 module.exports = function(app) {
 
