@@ -8,7 +8,7 @@ var morgan   = require('morgan');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 
-var Promise = require('promise');
+//var Promise = require('promise');
 // var promise = Promise.resolve(3);
 
 
