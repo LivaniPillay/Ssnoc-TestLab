@@ -15,21 +15,23 @@ app.controller("mainController",function($scope, ssnocService, $q){
 		$scope.login = function(){
 			$scope.loading = true;
 
-
 			findExistingMember().then(function(response){
 				if($scope.isExistingMember)
 				{
 					console.log("exisitng member");
 					if (validateLoginDetails($scope.validateUser)) {
-								  console.log("haodongxi");
 									// login successfull and send chat.html
 									// updateStatus();
 									window.location = "/#/chatting";
 					}
 					else {
-						console.log("huaidongxi");
 						$scope.message = "wrong infomation,please type in again";
 					}
+				}
+				else
+				{
+					$scope.signIn();
+					console.log($scope.isExistingMember);
 				}
 			});
 		}
