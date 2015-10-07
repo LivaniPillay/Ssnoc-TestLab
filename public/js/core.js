@@ -1,6 +1,7 @@
 var app = angular.module('ssnoc',['ngRoute']);
 
 app.config(['$routeProvider', function($routeProvider) {
+        // $rootscope ="hello world",
         $routeProvider
 
             // route for the home page
@@ -11,7 +12,7 @@ app.config(['$routeProvider', function($routeProvider) {
 
             // // route for the about page
             .when('/chatting', {
-                templateUrl : 'ChatPublicly.html',
+                templateUrl : 'chat.html',
                 controller  : 'chatController'
             })
 
@@ -21,3 +22,9 @@ app.config(['$routeProvider', function($routeProvider) {
             //     controller  : 'contactController'
             // });
     }]);
+
+app.run(function($rootScope){
+
+$rootScope.id=1;
+
+});

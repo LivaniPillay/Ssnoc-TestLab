@@ -7,18 +7,20 @@ app.factory('ssnocService',function($http) {
 			},
 			getMember : function(username) {
 				return $http.get('/api/ssnoc/member/'+ username);
+
 			},
 			create : function(member) {
 				return $http.post('/api/ssnoc/member/'+ member.username +"/"+member.password);
+
 			},
 			updateStatus : function(member){
 				return $http.post('/api/ssnoc/update_status/'+member._id +"/"+member.status);
 			},
-			addPublicMessage : function(message){
-				return $http.post('/api/ssnoc/message/' + user_id + '/' + message)
-			}
-			getPublicMessages : function(messages)
-				return $http.get('/api/ssnoc/messages')
+			addPublicMessage : function(message,user_id){
+				return $http.post('/api/ssnoc/message/' + user_id + '/' + message);
+			},
+			getPublicMessages : function(messages){
+				return $http.get('/api/ssnoc/messages');
 			}
 
 			// delete : function(id) {

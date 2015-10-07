@@ -8,14 +8,12 @@ function getMembers(res){
 				return res.send(err)	
 			}
 
-			console.log(members);
 			res.json(members); // return all todos in JSON format
 		});
 };
 
 function getMember(req, res){
 	Member.findOne({name: req.params.name}, function(err, members) {
-
 			if (err) {
 				return res.send(err)	
 			}

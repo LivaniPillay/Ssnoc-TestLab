@@ -1,8 +1,6 @@
 
-app.controller("mainController",function($scope, ssnocService, $q){
+app.controller("mainController",function($scope, ssnocService, $q,$rootScope){
 		$scope.member = {};
-		$scope.directory = {};
-		$scope.sortType ="status";
 		$scope.loading = true;
 		$scope.isExistingMember = true;
 		var defer = $q.defer();
@@ -53,11 +51,13 @@ app.controller("mainController",function($scope, ssnocService, $q){
 			ssnocService.getMember($scope.member.username)
 				.then(
 					function(response){
-						// console.log("response " + response.data);
+						 console.log("response " + response.data);
 						if(response.data !=undefined)
 						{ 	
+							$rootScope.id=response.data._id;
+							console.log($rootScope.id);
 							$scope.validateUser  = response.data;
-							console.log("true");
+							
 							$scope.isExistingMember = true;
 							defer.resolve($scope.isExistingMember);
 						}
@@ -91,50 +91,7 @@ app.controller("mainController",function($scope, ssnocService, $q){
 			goOffline();
 		}
 
-		function getDirectory()
-		{	
-			$scope.loading = true;
-			ssnocService.getDirectory()
-				.success(function(data) {
-			  // Sample data:
-			  // data = {
-			  //   "angela": 1,
-			  //   "fbwolf": 0,
-			  // }
-				$scope.directory = data;
-				$scope.loading = false;
-
-				//@angela angular will handle the sort for you. 
-       	
-      //  	        angular.forEach($scope.directory, function (name) {
-	     //           	var status=data[name];
-						// if ( status != 0){
-						// 	// add name into list
-						// 	onlinelist.push(name);
-						// }
-						// else {
-						// 	offlinelist.push(name);
-						// }	 
-	     //        });
-
-				 // sort list and merge list
-				 // onlinelist.sort();
-				 // offlinelist.sort();
-     //    	 	 var list = onlinelist.concat(offlinelist);
-
-				 // // acccoding to list, display it
-				 // angular.element($('#directory')).empty();
-
-				 // angular.forEach(list, function(name){
-				 // 	$('#directory').append(
-	    //             $('<li>').html(name);
-	    //             );
-				 // });
-
-				
-			});	
-
-		}
+		
 		// CREATE ==================================================================
 		// when submitting the add form, send the text to the node API
 		function createMember() {
@@ -145,6 +102,8 @@ app.controller("mainController",function($scope, ssnocService, $q){
 						$scope.loading = false;
 						$scope.member = data;
 						$scope.member.status = 1; 
+						$rootScope.id=$scope.member._id;
+						console.log("herer.."+$scope.member._id);
 						updateStatus(); 
 					});
 		}
