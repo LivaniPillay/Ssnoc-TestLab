@@ -26,7 +26,8 @@ function getMember(req, res){
 };
 
 function addMember (req, res) {
-	console.log("herererer");
+
+	var now = Date.now;
 	member = new Member({name: req.params.name, password: req.params.pass, status: 0});
 	
 	member.save(function (err, obj) {	  
@@ -50,7 +51,25 @@ function removeMember (id, res) {
 
 function updateStatus (req, res) {
 
-	res.json({ message: 'Status updated: Member ' + req.params.memeber_id + ' status is ' + req.params.status_id });
+		console.log('updateStatus id' + req.params.member_id);
+
+	Member.findById(req.params.member_id, function(err, member) {
+			if (err) {
+				return res.send(err);
+			}
+
+		console.log('updateStatus' + member);
+
+		member.status = req.params.status_id;
+
+		member.save(function(err) {
+			if (err) {
+				return res.send(err);
+			}
+
+			res.json({ message: 'Status updated: Member ' + req.params.memeber_id + ' status is ' + req.params.status_id });
+		});
+	});
 };
 
 module.exports = function(app) {
@@ -59,7 +78,7 @@ module.exports = function(app) {
 //Members
 /**
  * @api {get} /api/ssnoc/directory List all members in the directory
- *
+ * @apiGroup Member
  * @apiName GetMembers
  *
  * @apiSuccess {String} JSON with members information.
@@ -74,6 +93,7 @@ module.exports = function(app) {
 
 /**
  * @api {get} /api/ssnoc/member:name List member information
+ * @apiGroup Member
  *
  * @apiName GetMember
  *
@@ -92,6 +112,7 @@ module.exports = function(app) {
 
 /**
  * @api {post} /api/ssnoc/update_status/:memeber_id/:status_id Update member status
+ * @apiGroup Member
  *
  * @apiName UpdateStatus
  *
@@ -106,12 +127,13 @@ module.exports = function(app) {
  *     [{"name":"test","password":"1234","status":0,"_id":2,"__v":0}]
  */
 
-	app.post('/api/ssnoc/update_status/:memeber_id/:status_id', function(req, res) {
+	app.post('/api/ssnoc/update_status/:member_id/:status_id', function(req, res) {
 		updateStatus(req,res);
 	});
 
 /**
  * @api {post} /api/ssnoc/member/:name/:pass Add members to directory
+ * @apiGroup Member
  *
  * @apiName AddMember
  *
@@ -133,6 +155,7 @@ module.exports = function(app) {
 
 /**
  * @api {delete} /api/ssnoc/update_status/:memeber_id/:status_id Remove member from directory
+ * @apiGroup Member
  *
  * @apiName RemoveMember
  *
