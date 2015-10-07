@@ -9,11 +9,10 @@ app.factory('ssnocService',function($http) {
 				return $http.get('/api/ssnoc/member/'+ username);
 			},
 			create : function(member) {
-				return $http.post('/api/ssnoc/member', member);
-				console.log('Adding member ', member);
+				return $http.post('/api/ssnoc/member/'+ member.username +"/"+member.password);
 			},
 			updateStatus : function(member){
-				return $http.post('/api/ssnoc/updateStatus', id,status)
+				return $http.post('/api/ssnoc/update_status/'+member._id +"/"+member.status);
 			}
 			// delete : function(id) {
 			// 	return $http.delete('/api/ssnoc/' + id);

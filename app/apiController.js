@@ -26,6 +26,7 @@ function getMember(req, res){
 };
 
 function addMember (req, res) {
+	console.log("herererer");
 	member = new Member({name: req.params.name, password: req.params.pass, status: 0});
 	
 	member.save(function (err, obj) {	  
@@ -87,7 +88,6 @@ module.exports = function(app) {
 
 	app.get('/api/ssnoc/member/:name', function(req, res) {
 		getMember(req, res);
-		console.log("name!!")
 	});
 
 /**

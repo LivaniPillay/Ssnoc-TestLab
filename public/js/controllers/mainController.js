@@ -30,18 +30,30 @@ app.controller("mainController",function($scope, ssnocService, $q){
 				}
 				else
 				{
-					$scope.signIn();
 					console.log($scope.isExistingMember);
 				}
 			});
 		}
+
+		$scope.signup = function()
+		{   
+			if(validateSignInDetails()){
+				createMember();
+				window.location = "/#/chatting";
+			}
+			else{
+				console.log("type someting wong");
+			}
+
+		}
+
 
 
 		function findExistingMember(){
 			ssnocService.getMember($scope.member.username)
 				.then(
 					function(response){
-						console.log("response " + response.data);
+						// console.log("response " + response.data);
 						if(response.data !=undefined)
 						{ 	
 							$scope.validateUser  = response.data;
@@ -73,12 +85,6 @@ app.controller("mainController",function($scope, ssnocService, $q){
 		}
 
 
-		$scope.signIn = function()
-		{
-			if(validateSignInDetails()){
-				updateStatus();
-			}
-		}
 
 		$scope.logout = function(){
 			$scope.loading = true;
@@ -137,7 +143,9 @@ app.controller("mainController",function($scope, ssnocService, $q){
 				ssnocService.create($scope.member)
 					.success(function(data) {
 						$scope.loading = false;
-						$scope.member = member; 
+						$scope.member = data;
+						$scope.member.status = 1; 
+						updateStatus(); 
 					});
 		}
 
@@ -156,7 +164,7 @@ app.controller("mainController",function($scope, ssnocService, $q){
 		// }
 		
 		function validateLoginDetails(data){
-			console.log("validation " + data);
+			// console.log("validation " + data);
 			if(data != undefined)
 			{
 				if(data.password == $scope.member.password){
@@ -191,12 +199,13 @@ app.controller("mainController",function($scope, ssnocService, $q){
 
 
 		//update status send no
-		function updateStatus(member){
-			ssnocService.updateStatus(member).success(
+		function updateStatus(){
+			ssnocService.updateStatus($scope.member).success(
 				function(data){
 			 		$scope.member = data;
 			 		// console.log(data);
 			 		$scope.loading = false;
+			 		console.log(data);
 			 	}
 			);
 		}
