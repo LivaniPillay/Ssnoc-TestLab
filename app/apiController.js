@@ -67,7 +67,7 @@ function updateStatus (req, res) {
 				return res.send(err);
 			}
 
-			res.json({ message: 'Status updated: Member ' + req.params.memeber_id + ' status is ' + req.params.status_id });
+			res.json({ message: 'Status updated: Member ' + req.params.member_id + ' status is ' + req.params.status_id });
 		});
 	});
 };

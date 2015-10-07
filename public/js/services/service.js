@@ -16,8 +16,8 @@ app.factory('ssnocService',function($http) {
 			},
 			addPublicMessage : function(message){
 				return $http.post('/api/ssnoc/message/' + user_id + '/' + message)
-			}
-			getPublicMessages : function(messages)
+			},
+			getPublicMessages : function(messages){
 				return $http.get('/api/ssnoc/messages')
 			}
 
