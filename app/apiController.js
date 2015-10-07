@@ -25,7 +25,6 @@ function getMember(req, res){
 
 function addMember (req, res) {
 
-	var now = Date.now;
 	member = new Member({name: req.params.name, password: req.params.pass, status: 0});
 	
 	member.save(function (err, obj) {	  
@@ -49,7 +48,7 @@ function removeMember (id, res) {
 
 function updateStatus (req, res) {
 
-		console.log('updateStatus id' + req.params.member_id);
+	console.log('updateStatus id' + req.params.member_id);
 
 	Member.findById(req.params.member_id, function(err, member) {
 			if (err) {
@@ -69,6 +68,27 @@ function updateStatus (req, res) {
 		});
 	});
 };
+
+function addPublicMessage(req, res) {
+
+	Member.findById(req.params.member_id, function(err, member) {
+		if (err) {
+			return res.send(err);
+		}
+
+		message = new Message({req.params.message, req.params.member_id, member.status});
+		
+		message.save(function (err, obj) {	  
+			if (err) {
+				return res.send(err);
+			}
+
+			res.json(message);
+		});
+	}
+
+}
+
 
 module.exports = function(app) {
 
@@ -171,7 +191,7 @@ module.exports = function(app) {
 	});
 
 //Chat
-	app.post('/api/ssnoc/message/:user_id/:message', function(req, res) {
+	app.post('/api/ssnoc/message/:member_id/:message', function(req, res) {
 		addPublicMessage(req, res);
 	});
 
