@@ -23,11 +23,10 @@ app.controller("chatController",function($scope, ssnocService, $q,$rootScope){
       
       console.log("sendMessage");
       console.log($rootScope.id);
-      ssnocService.addPublicMessage($rootScope.id, $scope.chatMessage).
+      ssnocService.addPublicMessage($scope.chatMessage, $rootScope.id).
       success(function(response){
-        
+          console.log(response);
       });
-
 
     }
 
