@@ -2,10 +2,12 @@ app.controller("chatController",function($scope, ssnocService, $q,$rootScope){
     $scope.directory = {};
     $scope.sortType ="status";
     $scope.loading = true;
+    $scope.messages = {};
     $scope.chatMessage = "";
     var defer = $q.defer();
 
     getDirectory();
+    getAllMessages();
 
     function getDirectory()
     { 
@@ -25,9 +27,19 @@ app.controller("chatController",function($scope, ssnocService, $q,$rootScope){
       console.log($rootScope.id);
       ssnocService.addPublicMessage($scope.chatMessage, $rootScope.id).
       success(function(response){
-          console.log(response);
+          console.log("Response" + response);
+          $scope.messages.push(response);
       });
+    }
 
+     function getAllMessages(){
+        console.log("getting messages");
+        ssnocService.getPublicMessages()
+        .success(function(response)
+        {
+          console.log(response);
+          $scope.messages = response;
+        });
     }
 
 });
