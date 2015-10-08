@@ -1,6 +1,17 @@
 var Member = require('./models/memberModel');
 var Message = require('./models/messageModel');
 
+
+//testing faye
+var http = require('http'),
+    faye = require('faye');
+
+var server = http.createServer(),
+    bayeux = new faye.NodeAdapter({mount: '/'});
+
+bayeux.attach(server);
+server.listen(8000);
+
 function getMembers(res){
 	Member.find(function(err, members) {
 
