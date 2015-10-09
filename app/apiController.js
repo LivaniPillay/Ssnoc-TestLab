@@ -10,7 +10,7 @@ function getMembers(res){
 				return res.send(err)	
 			}
 
-			res.json(members); // return all todos in JSON format
+			res.json(members); 
 		});
 };
 
