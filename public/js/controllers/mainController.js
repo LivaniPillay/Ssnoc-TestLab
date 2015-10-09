@@ -19,8 +19,12 @@ app.controller("mainController",function($scope, ssnocService, $q,$rootScope){
 					console.log("exisitng member");
 					if (validateLoginDetails($scope.validateUser)) {
 									// login successfull and send chat.html
-									// updateStatus();
-									window.location = "/#/chatting";
+							$scope.member = $scope.validateUser;
+							$scope.member.status = 1;
+							updateStatus().then(function(response){
+								window.location = "/#/chatting";
+							});
+							
 					}
 					else {
 						$scope.message = "wrong infomation,please type in again";
@@ -44,8 +48,6 @@ app.controller("mainController",function($scope, ssnocService, $q,$rootScope){
 			}
 
 		}
-
-
 
 		function findExistingMember(){
 			ssnocService.getMember($scope.member.username)
@@ -103,7 +105,7 @@ app.controller("mainController",function($scope, ssnocService, $q,$rootScope){
 						$scope.member = data;
 						$scope.member.status = 1; 
 						$rootScope.id=$scope.member._id;
-						// updateStatus(); 
+						updateStatus(); 
 					});
 		}
 
@@ -158,13 +160,16 @@ app.controller("mainController",function($scope, ssnocService, $q,$rootScope){
 
 		//update status send no
 		function updateStatus(){
-			ssnocService.updateStatus($scope.member).success(
-				function(data){
-			 		$scope.member = data;
-			 		// console.log(data);
-			 		$scope.loading = false;
-			 		console.log(data);
-			 	}
-			);
+			console.log("status " +$scope.member.status)
+			ssnocService.updateStatus($scope.member)
+			.then(function(response){
+				console.log("update status " + response.status);
+				$scope.member = response;
+				$scope.loading = false;
+				defer.resolve($scope.member);
+			},function(err){
+				defer.reject(err);
+			});
+			return defer.promise;
 		}
 });

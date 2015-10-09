@@ -20,16 +20,21 @@
 		  				</div>
 					 -->
 <!-- sort by name and status-->
-  		 	<table class="table">
+<!--   		 	<table class="table">
               <thead>
-                <tr ng-repeat="member in directory" ng-bind="member.name">
+                <tr ng-repeat="member in directory|orderBy:['status','name']" ng-bind="member.name">
                   <th> </th>
                 </tr>
               </thead>
             <tbody >
            </tbody>
           
-        </table>
+        </table> -->
+
+       <div ng-repeat="member in directory|orderBy:['status','name']">
+        		<p ng-show="isOnline(member.status)" style="color:green;">{{member.name}}</p>
+        		<p ng-show="!isOnline(member.status)" style="color:red;">{{member.name}}</p>
+   		</div>
 
 		</div>
 				<div class="chatArea">

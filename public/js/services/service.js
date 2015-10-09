@@ -14,6 +14,7 @@ app.factory('ssnocService',function($http) {
 
 			},
 			updateStatus : function(member){
+				console.log("status update " + member._id + " ," + member.status);
 				return $http.post('/api/ssnoc/update_status/'+member._id +"/"+member.status);
 			},
 
