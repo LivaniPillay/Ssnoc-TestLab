@@ -9,7 +9,8 @@ app.controller("chatController",function($scope, ssnocService, $q,$rootScope){
     //testing faye
     var messageClient = new Faye.Client('http://localhost:8000/');
 
-    client.subscribe('/messages', function(message) {
+    messageClient.subscribe('/messages', function(message) {
+      $scope.messages.push(message);
       console.log('Got a message: ' + message.text);
     });
 
@@ -34,7 +35,7 @@ app.controller("chatController",function($scope, ssnocService, $q,$rootScope){
       console.log($rootScope.id);
       ssnocService.addPublicMessage($scope.chatMessage, $rootScope.id).
       success(function(response){
-          client.publish('/messages', {
+          messageClient.publish('/messages', {
             text: response.message
           });
           console.log("Response" + response);
