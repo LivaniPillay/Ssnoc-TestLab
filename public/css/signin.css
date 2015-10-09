@@ -6,7 +6,7 @@ body {
 .container {
   margin: 80px auto;
   width: 660px;
-  background-color: #C0C0C0;
+  background-color: #989898;
 }
 .form-signin {
   max-width: 330px;
@@ -32,32 +32,7 @@ body {
   margin: 10px auto;
   height:100%;
   width: 90%;
-  background-color:  #F5F5F5;
-}
-.directory{
-  height:90%;
-  width: 20%;
-  margin-right: 10px;
-  text-align: center;
-  background-color: #FFE4E1;
-  float: right;
-}
-
-.onlineDirectory{
-  margin-top: 70px;
-  margin: 10px auto;
-  height:40%;
-  width: 80%;
-  background-color:#90EE90;
-  overflow: scroll;
-}
-
-.offlineDirectory{
-  margin: 10px auto;
-  height:40%;
-  width: 80%;
-  background-color:#F08080;
-  overflow: scroll;
+  background-color:  #FFFFFF;
 }
 
 .chatArea{
@@ -65,7 +40,7 @@ body {
   margin-left: 14px;
   height:80%;
   width: 75%;
-  background-color:#F5DEB3;
+  background-color:#D8D8D8;
   overflow: scroll;
   float: left;
 }
@@ -74,18 +49,24 @@ body {
 margin: 7px auto;
 margin-left: 10px;
 width: 75%;
-height:7%;
-float: left;
-background-color: #FFC0CB;
+height:5%;
+float: right;
+background-color: #FFFFFF;
 }
 
 .welcomeMsg {
 text-align: center;
 margin: 7px auto;
-margin-left: 8px;
-width: 98%;
-height:5%;
-float: top;
-background-color: #A9A9A9;
+height:10%;
+float: top left;
+background-color: #989898;
 }
+.pull-left{
+  margin: 10px auto;
+  float: left;
+  height: 78%;
+  width: 15%;
+  background-color:#989898;
+  overflow: scroll;
 
+}
