@@ -1,8 +1,9 @@
 app.controller("chatController",function($scope, ssnocService, $q,$rootScope){
     $scope.directory = {};
+    $scope.directoryDict = {};
     $scope.sortType ="status";
     $scope.loading = true;
-    $scope.messages = {};
+    $scope.messages = [];
     $scope.chatMessage = "";
     var defer = $q.defer();
     var socket = io.connect();  
@@ -39,6 +40,9 @@ app.controller("chatController",function($scope, ssnocService, $q,$rootScope){
 
     socket.on('message', function(msg){
         $scope.messages.push(msg);
+        $scope.chatMessage = "";
+        $scope.$apply();
+
       });
   
      function getAllMessages(){
