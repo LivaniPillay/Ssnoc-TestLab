@@ -8,9 +8,12 @@ var morgan   = require('morgan');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 
+//test Socketio
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
 //var Promise = require('promise');
 // var promise = Promise.resolve(3);
-
 
 
 // configuration ===============================================================
@@ -25,8 +28,23 @@ app.use(methodOverride('X-HTTP-Method-Override')); // override with the X-HTTP-M
 
 
 // routes ======================================================================
-require('./app/apiController.js')(app);
+
+// require('./app/base')(io);
 
 // listen (start app with node server.js) ======================================
-app.listen(port);
-console.log("App listening on port " + port);
+// app.listen(port);
+// console.log("App listening on port " + port);
+
+
+http.listen(port, function(){
+  console.log('listening on' + port);
+});
+
+ io.on('connection', function(socket){
+     console.log('a user connected');
+
+//     io.emit('chat message',tweet);
+//     console.log('a user connected');
+  });
+
+require('./app/apiController.js')(app,io);

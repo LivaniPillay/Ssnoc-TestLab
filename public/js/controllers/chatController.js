@@ -5,13 +5,14 @@ app.controller("chatController",function($scope, ssnocService, $q,$rootScope){
     $scope.messages = {};
     $scope.chatMessage = "";
     var defer = $q.defer();
+    var socket = io.connect();  
 
     //testing faye
-    var messageClient = new Faye.Client('http://localhost:8000/');
+    // var Client = new Faye.Client('http://localhost:8000/');
 
-    client.subscribe('/messages', function(message) {
-      console.log('Got a message: ' + message.text);
-    });
+    // client.subscribe('/messages', function(message) {
+    //   console.log('Got a message: ' + message.text);
+    // });
 
     getDirectory();
     getAllMessages();
@@ -32,17 +33,14 @@ app.controller("chatController",function($scope, ssnocService, $q,$rootScope){
       
       console.log("sendMessage");
       console.log($rootScope.id);
-      ssnocService.addPublicMessage($scope.chatMessage, $rootScope.id).
-      success(function(response){
-          client.publish('/messages', {
-            text: response.message
-          });
-          console.log("Response" + response);
-          $scope.messages.push(response);
-      });
-
+      ssnocService.addPublicMessage($scope.chatMessage, $rootScope.id);
     }
 
+
+    socket.on('message', function(msg){
+        $scope.messages.push(msg);
+      });
+  
      function getAllMessages(){
         console.log("getting messages");
         ssnocService.getPublicMessages()

@@ -103,8 +103,7 @@ app.controller("mainController",function($scope, ssnocService, $q,$rootScope){
 						$scope.member = data;
 						$scope.member.status = 1; 
 						$rootScope.id=$scope.member._id;
-						console.log("herer.."+$scope.member._id);
-						updateStatus(); 
+						// updateStatus(); 
 					});
 		}
 

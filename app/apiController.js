@@ -1,16 +1,17 @@
 var Member = require('./models/memberModel');
 var Message = require('./models/messageModel');
-
+var path = require('path');
 
 //testing faye
-var http = require('http'),
-    faye = require('faye');
+// var http = require('http'),
+//     faye = require('faye');
 
-var server = http.createServer(),
-    bayeux = new faye.NodeAdapter({mount: '/'});
+// var server = http.createServer(),
+//     bayeux = new faye.NodeAdapter({mount: '/'});
 
-bayeux.attach(server);
-server.listen(8000);
+// bayeux.attach(server);
+// server.listen(8000);
+
 
 function getMembers(res){
 	Member.find(function(err, members) {
@@ -93,7 +94,7 @@ function addPublicMessage(req, res) {
 			if (err) {
 				return res.send(err);
 			}
-
+		  console.log("message"); 
 			res.json(message);
 		});
 	});
@@ -214,6 +215,8 @@ module.exports = function(app) {
 //Chat
 	app.post('/api/ssnoc/message/:member_id/:message', function(req, res) {
 		addPublicMessage(req, res);
+		io.emit('message',res);
+		console.log("emitting success" + res);
 	});
 
 	app.get('/api/ssnoc/messages', function(req, res) {
@@ -224,13 +227,18 @@ module.exports = function(app) {
 
 	app.get('/chatting', function(req, res) {
 		appRoot = __dirname + '/../public/ChatPublicly.html';
-		res.sendfile(appRoot); // load the single view file (angular will handle the page changes on the front-end)
+		res.sendFile(appRoot); // load the single view file (angular will handle the page changes on the front-end)
 	});
 	
 	app.get('*', function(req, res) {
 		appRoot = __dirname + '/../public/index.html';
 		console.log(appRoot);
-		res.sendfile(appRoot); // load the single view file (angular will handle the page changes on the front-end)
+		res.sendFile(path.join(appRoot)); // load the single view file (angular will handle the page changes on the front-end)
 	});
 
+
 };
+
+
+
+

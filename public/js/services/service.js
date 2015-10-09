@@ -1,6 +1,6 @@
 app.factory('ssnocService',function($http) {
-
-        var service = {
+			 var socket = io.connect();
+       var service = {
         
 			getDirectory : function() {
 				return $http.get('/api/ssnoc/directory');
@@ -18,7 +18,9 @@ app.factory('ssnocService',function($http) {
 			},
 
 			addPublicMessage : function(message,user_id){
-				return $http.post('/api/ssnoc/message/' + user_id + '/' + message);
+		  $http.post('/api/ssnoc/message/' + user_id + '/' + message).success(function(data){
+		 		// socket.emit("message", data);
+		 	 });
 			},
 			getPublicMessages : function(){
 				return $http.get('/api/ssnoc/messages');
