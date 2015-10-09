@@ -1,7 +1,5 @@
 app.controller("chatController",function($scope, ssnocService, $q,$rootScope){
     $scope.directory = {};
-    $scope.directoryDict = {};
-    $scope.sortType ="status";
     $scope.loading = true;
     $scope.messages = [];
     $scope.chatMessage = "";
@@ -26,7 +24,18 @@ app.controller("chatController",function($scope, ssnocService, $q,$rootScope){
       success(function(response){
           console.log("logout" + response);
       });
+    }
    
+    $scope.isOnline = function(status)
+    {
+        if(status != 0)
+        {
+          return true;
+        }
+        else
+        {
+          return false;
+        }
     }
 
     function getDirectory()
