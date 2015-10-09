@@ -1,5 +1,6 @@
 app.controller("chatController",function($scope, ssnocService, $q,$rootScope){
     $scope.directory = {};
+    $scope.directoryDict = {};
     $scope.loading = true;
     $scope.messages = [];
     $scope.chatMessage = "";
@@ -23,6 +24,7 @@ app.controller("chatController",function($scope, ssnocService, $q,$rootScope){
       ssnocService.updateStatus($rootScope.id, 0).
       success(function(response){
           console.log("logout" + response);
+          window.location = "/";
       });
     }
    
@@ -45,6 +47,10 @@ app.controller("chatController",function($scope, ssnocService, $q,$rootScope){
         .success(function(data) {
 
         $scope.directory = data;
+        for (var i = 0; i < $scope.directory.length; i ++) {
+          var member = $scope.directory[i];
+          $scope.directoryDict[member._id] = member;
+        }
         $scope.loading = false;
 
       }); 

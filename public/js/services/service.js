@@ -1,5 +1,5 @@
 app.factory('ssnocService',function($http) {
-			 var socket = io.connect();
+			
        var service = {
         
 			getDirectory : function() {
@@ -32,4 +32,5 @@ app.factory('ssnocService',function($http) {
 		}
 
 		return service;
+
 });
