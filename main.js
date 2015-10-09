@@ -40,11 +40,12 @@ http.listen(port, function(){
   console.log('listening on' + port);
 });
 
- io.on('connection', function(socket){
-     console.log('a user connected');
+//  io.on('connection', function(socket){
+//      console.log('a user connected');
 
-//     io.emit('chat message',tweet);
-//     console.log('a user connected');
-  });
+// //     io.emit('chat message',tweet);
+// //     console.log('a user connected');
+//   });
 
-require('./app/apiController.js')(app,io);
+
+require('./app/apiController.js')(app, io);

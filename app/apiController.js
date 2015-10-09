@@ -2,16 +2,6 @@ var Member = require('./models/memberModel');
 var Message = require('./models/messageModel');
 var path = require('path');
 
-//testing faye
-// var http = require('http'),
-//     faye = require('faye');
-
-// var server = http.createServer(),
-//     bayeux = new faye.NodeAdapter({mount: '/'});
-
-// bayeux.attach(server);
-// server.listen(8000);
-
 
 function getMembers(res){
 	Member.find(function(err, members) {
@@ -81,21 +71,23 @@ function updateStatus (req, res) {
 	});
 };
 
-function addPublicMessage(req, res) {
+function addPublicMessage(req, res, io) {
+	var member_id = req.params.member_id;
+	var message = req.params.message;
 
-	Member.findById(req.params.member_id, function(err, member) {
+	Member.findById(member_id, function(err, member) {
 		if (err) {
 			return res.send(err);
 		}
-
-		message = new Message({message: req.params.message, member_id: req.params.member_id, status: member.status});
 		
-		message.save(function (err, obj) {	  
+		mymessage = new Message({message: message, member_id: member_id, status: member.status});
+		
+		mymessage.save(function (err, obj) { 
 			if (err) {
 				return res.send(err);
 			}
-		  console.log("message"); 
-			res.json(message);
+			io.emit('message', mymessage);
+			res.json(mymessage);
 		});
 	});
 
@@ -112,7 +104,7 @@ function getPublicMessages(res){
 		});
 };
 
-module.exports = function(app) {
+module.exports = function(app, io) {
 
 // API Calls
 //Members
@@ -214,9 +206,7 @@ module.exports = function(app) {
 
 //Chat
 	app.post('/api/ssnoc/message/:member_id/:message', function(req, res) {
-		addPublicMessage(req, res);
-		io.emit('message',res);
-		console.log("emitting success" + res);
+		addPublicMessage(req, res, io);
 	});
 
 	app.get('/api/ssnoc/messages', function(req, res) {
@@ -238,7 +228,3 @@ module.exports = function(app) {
 
 
 };
-
-
-
-
