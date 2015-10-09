@@ -13,18 +13,17 @@ app.factory('ssnocService',function($http) {
 				return $http.post('/api/ssnoc/member/'+ member.username +"/"+member.password);
 
 			},
-			updateStatus : function(member){
-				return $http.post('/api/ssnoc/update_status/'+member._id +"/"+member.status);
+			updateStatus : function(member_id,status_id){
+				return $http.post('/api/ssnoc/update_status/'+member_id +"/"+status_id);
 			},
 
 			addPublicMessage : function(message,user_id){
-		  $http.post('/api/ssnoc/message/' + user_id + '/' + message).success(function(data){
-		 		// socket.emit("message", data);
-		 	 });
+		  		$http.post('/api/ssnoc/message/' + user_id + '/' + message).success(function(data){
+		 			// socket.emit("message", data);
+		 	 	});
 			},
 			getPublicMessages : function(){
 				return $http.get('/api/ssnoc/messages');
-
 			}
 
 			// delete : function(id) {

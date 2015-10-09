@@ -19,7 +19,7 @@ app.controller("mainController",function($scope, ssnocService, $q,$rootScope){
 					console.log("exisitng member");
 					if (validateLoginDetails($scope.validateUser)) {
 									// login successfull and send chat.html
-									// updateStatus();
+									updateStatus(1);
 									window.location = "/#/chatting";
 					}
 					else {
@@ -103,7 +103,7 @@ app.controller("mainController",function($scope, ssnocService, $q,$rootScope){
 						$scope.member = data;
 						$scope.member.status = 1; 
 						$rootScope.id=$scope.member._id;
-						// updateStatus(); 
+						updateStatus(1); 
 					});
 		}
 
@@ -157,8 +157,8 @@ app.controller("mainController",function($scope, ssnocService, $q,$rootScope){
 
 
 		//update status send no
-		function updateStatus(){
-			ssnocService.updateStatus($scope.member).success(
+		function updateStatus(status_id){
+			ssnocService.updateStatus($scope.member._id,staus_id).success(
 				function(data){
 			 		$scope.member = data;
 			 		// console.log(data);

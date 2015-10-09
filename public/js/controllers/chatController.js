@@ -18,6 +18,17 @@ app.controller("chatController",function($scope, ssnocService, $q,$rootScope){
     getDirectory();
     getAllMessages();
 
+    $scope.logout = function()
+    {
+      console.log("logout");
+      console.log($rootScope.id);
+      ssnocService.updateStatus($rootScope.id, 0).
+      success(function(response){
+          console.log("logout" + response);
+      });
+   
+    }
+
     function getDirectory()
     { 
       $scope.loading = true;
