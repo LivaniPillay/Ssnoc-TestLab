@@ -79,16 +79,19 @@ function addPublicMessage(req, res, io) {
 		if (err) {
 			return res.send(err);
 		}
+
+		if (member != null && member !== undefined) {
 		
-		mymessage = new Message({message: message, member_id: member_id, status: member.status});
-		
-		mymessage.save(function (err, obj) { 
-			if (err) {
-				return res.send(err);
-			}
-			io.emit('message', mymessage);
-			res.json(mymessage);
-		});
+			mymessage = new Message({message: message, member_id: member_id, status: member.status});
+			
+			mymessage.save(function (err, obj) { 
+				if (err) {
+					return res.send(err);
+				}
+				io.emit('message', mymessage);
+				res.json(mymessage);
+			});
+		}
 	});
 
 }
