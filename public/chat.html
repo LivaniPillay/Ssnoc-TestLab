@@ -1,6 +1,8 @@
 
 		<div ng-controller="chatController" class="chat-container">
 			
+<div class="chat-container">
+  
 
 <nav class="navbar navbar-default">
 <div class = "welcomeMsg">
@@ -13,41 +15,32 @@
   <ul class="dropdown-menu">
     <li><a href="#"> Change Status</a></li>
     <li><a href="#">Logout</a></li>
- 
-  </ul>
-           
+  </ul>      
  </ul>
 </nav>
 
 
-<nav class="navbar navbar-inverse">
-<div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="">Home</a>
-    </div
+<div class="panel top-controls">
+       <div class="panel-body row">
+           
+             <a class="col-xs-1"href="" title="Home" onclick="">
+              <img src="images/home.png"></img></a>
 
-<div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="">Directory</a>
-    </div>
+             <a class="col-xs-1"href="" title="Directory" onclick="">
+              <img src="images/directory.png"></img></a>
 
-    <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="">Messages</a>
-    </div>
+             <a class="col-xs-1"href="" title="PrivateChat" onclick="">
+              <img src="images/message.png"></img></a>
 
-<div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="announcements.html">Announcements</a>
-    </div>
-
-
-
-</nav>
+             <a class="col-xs-1"href="" title="Announcements" onclick="">
+              <img src="images/announcement.png"></img></a>
+           
+           </div>
+       </div>
 
 
 			
-			<div class="row">
+			<!--<div class="row">
 			<div class="pull-left">			
        <button ng-click="logout()" type="submit" class="btn btn-primary">Logout</button>
        <div ng-repeat="member in directory|orderBy:['status','name'] : true">
@@ -55,7 +48,7 @@
         		<p ng-show="!isOnline(member.status)" style="color:red;">{{member.name}}</p>
    		</div>
 
-					<!-- 	<div class="btn-group" position="right" >
+					<div class="btn-group" position="right" >
 							    <button type="button" class="btn btn-primary">Share your Status</button>
 							    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
 							      <span class="caret"></span>
@@ -66,10 +59,10 @@
 							      <li><a href="#">Emergency</a></li>
 							      <li><a href="#">Offline</a></li>
 							    </ul>
-		  				</div>
-					 -->
+		  				</div> -->
+					 
 <!-- sort by name and status-->
-  		 	<table class="table">
+  		<!-- <table class="table">
               <thead>
                 <tr ng-repeat="member in directory" ng-bind="member.name">
                   <th> </th>
@@ -79,7 +72,8 @@
            </tbody>
           
         </table>
-		</div>
+		</div> -->
+
 				<div class="chatArea">
 					<p ng-repeat="message in messages">
             <b><span ng-bind="directoryDict[message.member_id].name"></span></b>: &nbsp &nbsp
@@ -88,12 +82,12 @@
             (<span ng-bind="message.status"></span>)
 					<p>			
 				</div>
-		</div>
 
 				<div class="sendMsg"> 
 				<input ng-model="chatMessage" class="col-xs-9" id="ex3" type="text" height="15%"placeholder="Type your message.." required autofocus>
 					
-				<button ng-click="sendMessage()" type="submit" class="btn btn-success">Send</button>
+				<button ng-click="sendMessage()" type="submit" class="btn btn-success" float="right">Send</button>
 				</div>
 
 		</div>
+    </div>

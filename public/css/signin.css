@@ -32,17 +32,17 @@ body {
   margin: 10px auto;
   height:100%;
   width: 90%;
-  background-color:  #FFFFFF;
+  background-color:  #989898;
 }
 
 .chatArea{
   margin: 5px auto;
   margin-left: 14px;
-  height:80%;
+  height:60%;
   width: 75%;
-  background-color:#D8D8D8;
+  background-color:#FFFFFF;
   overflow: scroll;
-  float: left;
+  float: right;
 }
 
 .sendMsg {
@@ -51,7 +51,7 @@ margin-left: 10px;
 width: 75%;
 height:5%;
 float: right;
-background-color: #FFFFFF;
+background-color: #989898;
 }
 
 .welcomeMsg {
@@ -66,4 +66,20 @@ width: 80%;
   background-color:#989898;
   overflow: scroll;
 
+}
+.dropdown
+{
+  z-index: 4;
+}
+
+
+.navbar navbar-inverse
+{
+  z-index: 2;
+}
+
+
+.panel panel-info
+{
+  height: 5%
 }
