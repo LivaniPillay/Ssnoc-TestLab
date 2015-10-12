@@ -56,6 +56,7 @@ background-color: #989898;
 
 .welcomeMsg {
 text-align: center;
+font-size: 18;
 width: 80%;
 }
 .pull-left{
@@ -82,4 +83,9 @@ width: 80%;
 .panel panel-info
 {
   height: 5%
+}
+
+.privatechat_user
+{
+ text-align: Left 
 }
